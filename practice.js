@@ -9,11 +9,14 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+
+//invoke the return value by writing outer();
+//save that value to variable inner
+ var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
+  inner();
 
 
 
@@ -32,7 +35,13 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+ var callFriend = function(){
+  var friend = 'Jake';
+  function callF(number){
+    return 'Calling ' + friend + ' at ' + number;
+  }
+  return callF;
+};
 
 
 
@@ -52,6 +61,14 @@ var callFriend = function(){
   count() // 4
 
 
+function makeCounter(){
+  var c = 0;  
+    return function(){
+        return ++c;
+    }
+    
+}
+
 
 //Next Problem
 
@@ -64,6 +81,48 @@ var callFriend = function(){
   After the function has been called N number of times, console.log('STAHHP');
 */
 
+function first(func){
+  var run = true;  
+  return function second(){ 
+    if (run === true) {
+        func();
+        run = false;
+    }
+  }
+}
+
+var runner = first(function(){
+  console.log('blue');
+});
+
+function first(func, times){
+  var counter = 0;  
+  return function second(){ 
+    if (counter < times) {
+        func();
+        counter++; 
+    }
+    else if (counter === times) {
+        console.log('stahp');
+        counter++;
+    }
+    else if (counter > times) {
+        return;
+    }
+  }
+}
 
 
+var runner = first(function(){
+  console.log('blue');
+}, 4);
 
+runner();
+runner();
+runner();
+runner();
+runner();
+runner();
+runner();
+runner();
+runner();
